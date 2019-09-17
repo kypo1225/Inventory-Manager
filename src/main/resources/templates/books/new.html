@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>New title - Book</title>
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>New Book</h1>
+		<form th:action="@{/books}" th:method="post">
+			<div class="form-group">
+				<label class="control-label">タイトル</label> <input
+					class="form-control" type="text" name="title" />
+			</div>
+			<div class="form-group">
+				<label class="control-label">著者</label> <input class="form-control"
+					type="text" name="person" />
+			</div>
+			 <div class="form-group">
+				<label class="control-label">ページ数</label> <input
+					class="form-control" type="number" name="page" />
+			</div>
+			<!--プルダウンじゃないバージョン  
+			<div class="form-group">
+				<label class="control-label">カテゴリ</label> <input
+					class="form-control" type="text" name="category" />
+			</div> -->
+			<!-- プルダウンバージョン -->
+			<div class="form-group">
+				<select class="form-control" id="singleSelect" name="selectCategory">
+					<option value="">カテゴリ</option>
+					<option th:each="category : ${selectCategory}" th:value="${category.value}"
+						th:text="${category.value}"
+						th:selected="${category.value} == *{selectCategory}">singleSelect</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="form-control-label">登録日</label> <input
+					class="form-control" type="date" name="regist" />
+			</div>
+			<button class="btn btn-default" type="submit">作成</button>
+		</form>
+		<div class="pull-right">
+			<a class="btn btn-link" href="/books">一覧画面へ</a>
+		</div>
+	</div>
+</body>
+</html>
