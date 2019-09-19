@@ -72,11 +72,9 @@ public class BookController {
 //    }
     @PostMapping
     public String create(@ModelAttribute @Validated Book book, BindingResult bindingResult, Model model) {
-    	System.out.println(book);
     	if(bindingResult.hasErrors()) {
 			return newBook(book,model);
 		}
-    	System.out.println(book);
     	bookService.save(book);
     	return "redirect:/books";
     	
