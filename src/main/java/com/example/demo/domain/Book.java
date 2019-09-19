@@ -2,7 +2,9 @@ package com.example.demo.domain;
 
 
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +34,6 @@ public class Book {
 	private Integer page;
 	@NotBlank
 	private String selectCategory;
-	@NotNull
-	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date register;
 	
 	@Override
