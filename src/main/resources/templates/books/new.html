@@ -10,36 +10,48 @@
 <body>
 	<div class="container">
 		<h1>New Book</h1>
-		<form th:action="@{/books}" th:method="post">
-			<div class="form-group">
-				<label class="control-label">タイトル</label> <input
-					class="form-control" type="text" name="title" />
+		<form th:action="@{/books}" th:method="post" th:object="${book}">
+			<!-- エラー用のCSS -->
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('title')}?'has-error'">
+				<label class="control-label">タイトル</label> 
+				<input class="form-control" type="text" name="title" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('title')}"
+					th:errors="*{title}">error</span>
 			</div>
-			<div class="form-group">
-				<label class="control-label">著者</label> <input class="form-control"
-					type="text" name="person" />
+			<!-- エラー用のCSS -->
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('person')}?'has-error'">
+				<label class="control-label">著者</label> 
+				<input class="form-control"	type="text" name="person" /> <span class="text-danger"
+					th:if="${#fields.hasErrors('person')}" th:errors="*{person}">error</span>
 			</div>
-			 <div class="form-group">
-				<label class="control-label">ページ数</label> <input
-					class="form-control" type="number" name="page" />
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('page')}?'has-error'">
+				<label class="control-label">ページ数</label>
+				<input class="form-control" type="number" name="page" /> <span
+					class="text-danger" th:if="${#fields.hasErrors('page')}"
+					th:errors="*{page}">error</span>
 			</div>
-			<!--プルダウンじゃないバージョン  
-			<div class="form-group">
-				<label class="control-label">カテゴリ</label> <input
-					class="form-control" type="text" name="category" />
-			</div> -->
-			<!-- プルダウンバージョン -->
-			<div class="form-group">
+			<!-- プルダウン -->
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('selectCategory')}?'has-error'">
+				<label class="control-label">カテゴリ</label>
 				<select class="form-control" id="singleSelect" name="selectCategory">
-					<option value="">カテゴリ</option>
-					<option th:each="category : ${selectCategory}" th:value="${category.value}"
-						th:text="${category.value}"
+					<option value="">----</option>
+					<option th:each="category : ${selectCategory}"
+						th:value="${category.value}" th:text="${category.value}"
 						th:selected="${category.value} == *{selectCategory}">singleSelect</option>
-				</select>
+				</select> <span class="text-danger"
+					th:if="${#fields.hasErrors('selectCategory')}"
+					th:errors="*{selectCategory}">error</span>
 			</div>
-			<div class="form-group">
-				<label class="form-control-label">登録日</label> <input
-					class="form-control" type="date" name="regist" />
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('register')}?'has-error'">
+				<label class="control-label">登録日</label> 
+				<input class="form-control" type="date" name="register"/>
+				 <span class="text-danger" th:if="${#fields.hasErrors('register')}"
+					th:errors="*{register}">error</span>
 			</div>
 			<button class="btn btn-default" type="submit">作成</button>
 		</form>

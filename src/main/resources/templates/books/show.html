@@ -31,6 +31,10 @@
           <label>カテゴリ</label>
           <p th:text="*{selectCategory}"></p>
         </div>
+        <div>
+        <label>登録日</label>
+        <p th:text="*{register}">
+        </div>
       </div>
       <div>
         <a class="btn btn-default" th:href="@{/books/{id}/edit(id=*{id})}">編集</a>

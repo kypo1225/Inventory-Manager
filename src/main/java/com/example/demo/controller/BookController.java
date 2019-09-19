@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +39,8 @@ public class BookController {
     	category.put("B", "小説");
     	category.put("C", "コミックス");
     	category.put("D", "ビジネス・経済");
-    	category.put("D", "暮らし・健康・料理");    	
+    	category.put("E", "暮らし・健康・料理");    	
+    	category.put("F", "ライトノベル");
 		return category;
     }
     
@@ -62,12 +65,23 @@ public class BookController {
         return "books/show";
     }
 
+//    @PostMapping
+//    public String create(@ModelAttribute Book book) { 
+//    	bookService.save(book);
+//        return "redirect:/books"; 
+//    }
     @PostMapping
-    public String create(@ModelAttribute Book book) { 
+    public String create(@ModelAttribute @Validated Book book, BindingResult bindingResult, Model model) {
+    	System.out.println(book);
+    	if(bindingResult.hasErrors()) {
+			return newBook(book,model);
+		}
+    	System.out.println(book);
     	bookService.save(book);
-        return "redirect:/books"; 
+    	return "redirect:/books";
+    	
     }
-
+    
     @PutMapping("{id}")
     public String update(@PathVariable Long id, @ModelAttribute Book book) {
         book.setId(id);
