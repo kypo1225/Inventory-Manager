@@ -4,6 +4,9 @@ package com.example.demo.domain;
 
 
 
+
+
+
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -13,6 +16,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +37,10 @@ public class Book {
 	private Integer page;
 	@NotBlank
 	private String selectCategory;
+	//sql.Dateの場合、以下のアノテーションを付与するとなぜかタイプミスマッチになるのでtypeMismatchで判定するしかない。
+	//util.Dateの場合、以下のアノテーションにすれば問題なく動く(※htmlのtypeをDateだとタイプミスマッチになるのでtextで手入力する事になる)
+	//@DateTimeFormat(pattern="yyyy/MM/dd")
+	//@NotNull
 	private Date register;
 	
 	@Override
