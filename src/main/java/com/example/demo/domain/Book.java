@@ -1,12 +1,4 @@
 package com.example.demo.domain;
-
-
-
-
-
-
-
-
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -15,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
